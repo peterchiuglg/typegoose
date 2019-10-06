@@ -47,16 +47,13 @@ export class Typegoose {
     t: T,
     { existingMongoose, schemaOptions, existingConnection }: GetModelForClassOptions = {}
   ) {
-    const name = this.constructor.name;
-    if (!models[name]) {
-      this.setModelForClass(t, {
-        existingMongoose,
-        schemaOptions,
-        existingConnection,
-      });
-    }
+    const modelForClass = this.setModelForClass(t, {
+      existingMongoose,
+      schemaOptions,
+      existingConnection,
+    });
 
-    return models[name] as ModelType<this> & T;
+    return modelForClass as ModelType<this> & T;
   }
 
   /**
